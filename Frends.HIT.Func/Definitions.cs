@@ -2,10 +2,8 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Common;
 using System.Reflection;
-using HIT;
 
-namespace Frends.HIT.Func {
-    
+namespace Frends.HIT.Func {   
     /// <summary>
     /// Input data for the return input function
     /// </summary>
