@@ -2,6 +2,8 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Common;
 using System.Reflection;
+using HIT.Vault;
+
 namespace Frends.HIT.Func {
     
     /// <summary>
