@@ -2,7 +2,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Common;
 using System.Reflection;
-using HIT.Vault;
+using HIT;
 
 namespace Frends.HIT.Func {
     
