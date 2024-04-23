@@ -15,7 +15,7 @@
     </PropertyGroup>
 
     <PropertyGroup>
-        <PackageId>HIT.Vault</PackageId>
+        <PackageId>Frends.HIT.Func</PackageId>
         <RepositoryType>git</RepositoryType>
         <RepositoryUrl>https://github.com/Hoglandets-IT/Frends.HIT.Func</RepositoryUrl>
     </PropertyGroup>
