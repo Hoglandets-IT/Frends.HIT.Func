@@ -20,15 +20,15 @@
         <RepositoryUrl>https://github.com/Hoglandets-IT/Frends.HIT.Func</RepositoryUrl>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    </ItemGroup>
+
     <!-- <ItemGroup>
         <None Include="FrendsTaskMetadata.json" Pack="true" PackagePath="/">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
     </ItemGroup> -->
-
-    <ItemGroup>
-      <PackageReference Include="HIT.Vault" Version="0.*" />
-    </ItemGroup>
 
 
     
