@@ -13,6 +13,11 @@ namespace Frends.HIT.Func {
         [DisplayFormat(DataFormatString = "Expression")]
         public JArray InputData { get; set; }
     }
+
+    public class FormatedTele2Data
+    {
+        public JArray Data { get; set; }
+    }
     
     /// <summary>
     /// Input data for the return input function

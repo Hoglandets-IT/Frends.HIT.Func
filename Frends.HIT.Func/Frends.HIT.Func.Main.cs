@@ -7,10 +7,17 @@ namespace Frends.HIT.Func;
 
 public static class Main {
 
-    public static JArray FormatJsonDataTele2([PropertyTab] FormatTele2Data tele2Data)
+    public static FormatedTele2Data FormatJsonDataTele2([PropertyTab] FormatTele2Data tele2Data)
     {
-        var formatedData = OrganizationStructureFormatter.OrganizationStructure(tele2Data.InputData);
-        return new JArray();
+        var formatedData = OrganizationStructureFormatter.FormatOrganizationStructure(tele2Data.InputData);
+        if (tele2Data.Type == FormatDataForType.Orginzation)
+        {
+            NameStructureFormatter.FormatNameAndIdentifiers(formatedData);
+        }
+        return new FormatedTele2Data
+        {
+            Data = formatedData
+        };
     }
     
     /// <summary>

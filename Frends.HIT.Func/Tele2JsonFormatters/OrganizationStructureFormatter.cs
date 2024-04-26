@@ -8,12 +8,12 @@ public class OrganizationStructureFormatter
     private const string Concern = "Koncern";
     private const string Field = "field";
     
-    public static JArray OrganizationStructure(JArray data)
+    public static JArray FormatOrganizationStructure(JArray data)
     {
-        foreach (var jToken in data)
+        foreach (var item in data)
         {
-            var obj = (JObject)jToken;
-            if ((string)obj.GetValue(Field + "01", StringComparison.OrdinalIgnoreCase)?.ToString() == Concern)
+            var obj = (JObject)item;
+            if (obj.GetValue(Field + "01", StringComparison.OrdinalIgnoreCase)?.ToString() == Concern)
             {
                 obj = SortOrganizationTree(obj);
             }
@@ -22,14 +22,17 @@ public class OrganizationStructureFormatter
             foreach (var property in properties)
             {
                 if (!property.Name.StartsWith(Field, StringComparison.OrdinalIgnoreCase)) continue;
-                var propertyValue = (string)property.Value;
+                var propertyValue = GetValue(property.Value);
                 if (string.IsNullOrEmpty(propertyValue)) continue;
                 var value = TrimValue(propertyValue);
-                if (previousValues.TryGetValue(GetPreviousFieldName(property.Name), out var previousFieldValue))
+                if (property.Name != Field + "01")
                 {
-                    if (value == previousFieldValue)
+                    if (previousValues.TryGetValue(GetPreviousFieldName(property.Name), out var previousFieldValue))
                     {
-                        value = null;
+                        if (value == previousFieldValue)
+                        {
+                            value = null;
+                        }
                     }
                 }
                 property.Value = value;  
@@ -39,6 +42,12 @@ public class OrganizationStructureFormatter
         return data;
     }
 
+
+    private static string? GetValue(JToken token)
+    {
+        var value = Convert.ToString(token);
+        return string.IsNullOrEmpty(value) ? null : value;
+    }
     private static string TrimValue(string str)
     {
         return Regex.Replace(str, @"^\d+\s*", "").Trim();
@@ -54,7 +63,7 @@ public class OrganizationStructureFormatter
         return obj;
     }
 
-    private static string GetPreviousFieldName(string fieldName)
+    private static string? GetPreviousFieldName(string fieldName)
     {
         if (int.TryParse(fieldName.AsSpan(5), out var number) && number > 1)
         {
