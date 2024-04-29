@@ -2,7 +2,6 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Common;
 using System.Reflection;
-using HIT;
 using Newtonsoft.Json.Linq;
 
 namespace Frends.HIT.Func {
