@@ -30,9 +30,9 @@
         </None>
     </ItemGroup> -->
 
-    <!-- <ItemGroup>
+    <ItemGroup>
       <PackageReference Include="HIT.Vault" Version="0.1.*" />
-    </ItemGroup> -->
+    </ItemGroup>
 
 
     
