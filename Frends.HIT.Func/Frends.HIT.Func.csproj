@@ -30,6 +30,10 @@
         </None>
     </ItemGroup> -->
 
+    <ItemGroup>
+      <PackageReference Include="HIT.Vault" Version="0.*" />
+    </ItemGroup>
+
 
     
 </Project>
