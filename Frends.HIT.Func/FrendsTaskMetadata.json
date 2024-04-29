@@ -2,6 +2,9 @@
     "Tasks": [
         {
             "TaskMethod": "Frends.HIT.Func.Main.ReturnInput"
+        },
+        {
+            "TaskMethod": "Frends.HIT.Func.Main.FormatJsonDataTele2"
         }
     ]
 }
