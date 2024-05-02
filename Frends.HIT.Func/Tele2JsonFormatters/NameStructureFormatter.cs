@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using System.Security.Cryptography;
+using System.Text;
+using Newtonsoft.Json.Linq;
 
 namespace Frends.HIT.Func.Tele2JsonFormatters;
 
@@ -50,6 +52,19 @@ public class NameStructureFormatter
             parts[i] = parts[i].ToLower();
         }
         var result = string.Join("-", parts);
-        return result;
+        return HashId(result);
+    }
+
+    private static string HashId(string id)
+    {
+        using var md5 = MD5.Create();
+        var bytes = Encoding.UTF8.GetBytes(id);
+        var hashBytes = md5.ComputeHash(bytes);
+        var builder = new StringBuilder();
+        foreach (var t in hashBytes)
+        {
+            builder.Append(t.ToString("x2"));
+        }
+        return builder.ToString();
     }
 }
