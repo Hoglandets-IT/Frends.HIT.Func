@@ -6,7 +6,7 @@ namespace Frends.HIT.Func.Tele2JsonFormatters;
 
 public class NameStructureFormatter
 {
-    private const string OrganizationDomainSuffix = "@org.hoglandsforbundet";
+    private const string OrganizationDomainSuffix = "@org.hoglandsforbundet.se";
     private const string Organisation = "Organisation";
     private const string Field = "field";
 
