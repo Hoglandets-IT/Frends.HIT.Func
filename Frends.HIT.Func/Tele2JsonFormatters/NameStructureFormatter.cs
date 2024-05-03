@@ -21,8 +21,7 @@ public class NameStructureFormatter
             obj["id"] = id + OrganizationDomainSuffix;
             obj["reference"] = id;
             obj["firstName"] = Organisation;
-            obj["lastName"] = name;
-
+            obj["lastName"] = obj.GetValue(Field + "01").ToString();
         }
     }
 
