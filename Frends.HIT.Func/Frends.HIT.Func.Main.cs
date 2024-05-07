@@ -9,14 +9,15 @@ public static class Main {
 
     public static FormatedTele2Data FormatJsonDataTele2([PropertyTab] FormatTele2Data tele2Data)
     {
-        var formatedData = OrganizationStructureFormatter.FormatOrganizationStructure(tele2Data.InputData);
+        var data = OrganizationStructureFormatter.FormatOrganizationStructure(tele2Data.InputData);
+        CostCenterManager.GetCostCenter(data);
         if (tele2Data.Type == FormatDataForType.Orginzation)
         {
-            NameStructureFormatter.FormatNameAndIdentifiers(formatedData);
+            NameStructureFormatter.FormatNameAndIdentifiers(data);
         }
         return new FormatedTele2Data
         {
-            Data = formatedData
+            Data = data
         };
     }
     
@@ -28,7 +29,8 @@ public static class Main {
     public static OutputData ReturnInput([PropertyTab] InputData input) {
         var output = new OutputData();
         output.OutputString = input.InputString;
-        
+        Console.WriteLine(@"Hello World");
+
         return output;
     }
 
