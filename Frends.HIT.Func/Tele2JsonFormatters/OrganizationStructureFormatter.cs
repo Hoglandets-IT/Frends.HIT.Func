@@ -35,8 +35,18 @@ public class OrganizationStructureFormatter
                         }
                     }
                 }
-                property.Value = value;  
-                previousValues[property.Name] = value; 
+
+                if (string.IsNullOrEmpty(value))
+                {
+                    property.Value = null!;  
+                    previousValues[property.Name] = null; 
+                }
+                else
+                {
+                    property.Value = value;  
+                    previousValues[property.Name] = value; 
+                }
+                
             }
         }
         return data;
