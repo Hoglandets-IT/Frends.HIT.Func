@@ -1,4 +1,5 @@
-﻿using System.Security.Cryptography;
+﻿using System.Collections;
+using System.Security.Cryptography;
 using System.Text;
 using Newtonsoft.Json.Linq;
 
@@ -7,7 +8,6 @@ namespace Frends.HIT.Func.Tele2JsonFormatters;
 public class NameStructureFormatter
 {
     private const string OrganizationDomainSuffix = "@org.hoglandsforbundet.se";
-    private const string Organisation = "Organisation";
     private const string Field = "field";
 
     public static void FormatNameAndIdentifiers(JArray data)
@@ -17,11 +17,12 @@ public class NameStructureFormatter
             var obj = (JObject)jToken;
             var name = GetName(obj);
             var id = GetId(name);
-
+            var names = GetFirstLastName(obj);
+            Console.WriteLine(names["firstName"]);
             obj["id"] = id + OrganizationDomainSuffix;
             obj["reference"] = id;
-            obj["firstName"] = Organisation;
-            obj["lastName"] = obj.GetValue(Field + "01").ToString();
+            obj["firstName"] = names["firstName"];
+            obj["lastName"] = names["lastName"];
         }
     }
 
@@ -65,5 +66,23 @@ public class NameStructureFormatter
             builder.Append(t.ToString("x2"));
         }
         return builder.ToString();
+    }
+
+    private static Dictionary<string, string> GetFirstLastName(JObject jObject)
+    {
+        var dict = new Dictionary<string, string>();
+        var firstName = new List<string?>();
+        var lastName = new List<string?>();
+        for (var i = 7; i >= 0; i--)
+        {
+            if(i == 0) {continue;}
+            var value = jObject.GetValue(Field + "0" + i).ToString();
+            if (string.IsNullOrEmpty(value)) continue;
+            var targetList = firstName.Count < 3 ? firstName : lastName;
+            targetList.Add(value);
+        }
+        dict["firstName"] = string.Join(" - ", firstName);
+        dict["lastName"] = string.Join(" - ", lastName);
+        return dict;
     }
 }
