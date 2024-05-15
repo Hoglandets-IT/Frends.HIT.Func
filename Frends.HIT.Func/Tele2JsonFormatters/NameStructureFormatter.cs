@@ -81,6 +81,20 @@ public class NameStructureFormatter
             var targetList = firstName.Count < 3 ? firstName : lastName;
             targetList.Add(value);
         }
+
+        if (lastName.Count == 0)
+        {
+            switch (firstName.Count)
+            {
+                case > 1:
+                    lastName.Add(firstName[^1]);
+                    firstName.RemoveAt(firstName.Count - 1);
+                    break;
+                case 1:
+                    lastName.Add("Organisation");
+                    break;
+            }
+        }
         dict["firstName"] = string.Join(" - ", firstName);
         dict["lastName"] = string.Join(" - ", lastName);
         return dict;
