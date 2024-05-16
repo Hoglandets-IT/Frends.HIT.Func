@@ -8,6 +8,7 @@ namespace Frends.HIT.Func.Tele2JsonFormatters;
 public class NameStructureFormatter
 {
     private const string OrganizationDomainSuffix = "@org.hoglandsforbundet.se";
+    private const string Organisation = "Organisation";
     private const string Field = "field";
 
     public static void FormatNameAndIdentifiers(JArray data)
@@ -23,6 +24,7 @@ public class NameStructureFormatter
             obj["reference"] = id;
             obj["firstName"] = names["firstName"];
             obj["lastName"] = names["lastName"];
+            obj["title"] = Organisation;
         }
     }
 
@@ -91,7 +93,7 @@ public class NameStructureFormatter
                     firstName.RemoveAt(firstName.Count - 1);
                     break;
                 case 1:
-                    lastName.Add("Organisation");
+                    lastName.Add(Organisation);
                     break;
             }
         }
