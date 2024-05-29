@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Text;
 using Newtonsoft.Json.Linq;
 
@@ -73,32 +72,28 @@ public class NameStructureFormatter
     private static Dictionary<string, string> GetFirstLastName(JObject jObject)
     {
         var dict = new Dictionary<string, string>();
-        var firstName = new List<string?>();
-        var lastName = new List<string?>();
-        for (var i = 7; i >= 0; i--)
+        var firstNameFound = false;
+        var firstName = string.Empty;
+        var lastName = string.Empty;
+        
+        for (var i = 7; i > 0; i--)
         {
-            if(i == 0) {continue;}
-            var value = jObject.GetValue(Field + "0" + i).ToString();
+            var value = jObject.GetValue(Field + "0" + i)?.ToString();
             if (string.IsNullOrEmpty(value)) continue;
-            var targetList = firstName.Count < 3 ? firstName : lastName;
-            targetList.Add(value);
-        }
-
-        if (lastName.Count == 0)
-        {
-            switch (firstName.Count)
+            if (!firstNameFound)
             {
-                case > 1:
-                    lastName.Add(firstName[^1]);
-                    firstName.RemoveAt(firstName.Count - 1);
-                    break;
-                case 1:
-                    lastName.Add(Organisation);
-                    break;
+                firstName = value;
+                firstNameFound = true;
+            }
+            else
+            {
+                lastName = value;
+                break; 
             }
         }
-        dict["firstName"] = string.Join(" - ", firstName);
-        dict["lastName"] = string.Join(" - ", lastName);
+        dict["firstName"] = firstName;
+        dict["lastName"] = lastName;
         return dict;
     }
+
 }
