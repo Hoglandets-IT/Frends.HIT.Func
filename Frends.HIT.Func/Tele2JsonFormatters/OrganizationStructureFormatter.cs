@@ -60,9 +60,11 @@ public class OrganizationStructureFormatter
     }
     private static string TrimValue(string str)
     {
-        return Regex.Replace(str, @"^\d+\s*", "").Trim();
+        return Regex.Replace(str, @"^\d+\s*", "")
+            .Replace(@"BU ", "")
+            .Replace(@"SF ", "")
+            .Trim();
     }
-
     private static JObject SortOrganizationTree(JObject obj)
     {
         for (var i = 1; i <= 6; i++)
