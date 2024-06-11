@@ -9,16 +9,16 @@ public class NameStructureFormatter
     private const string OrganizationDomainSuffix = "@org.hoglandsforbundet.se";
     private const string Organisation = "Organisation";
     private const string Field = "field";
+    private const string Id = "ID";
 
     public static void FormatNameAndIdentifiers(JArray data)
     {
         foreach (var jToken in data)
         {
             var obj = (JObject)jToken;
-            var name = GetName(obj);
-            var id = GetId(name);
+            var id = GetId(GetIdString(obj));
             var names = GetFirstLastName(obj);
-            Console.WriteLine(names["firstName"]);
+            DeleteIdFields(obj);
             obj["id"] = id + OrganizationDomainSuffix;
             obj["reference"] = id;
             obj["firstName"] = names["firstName"];
@@ -26,13 +26,12 @@ public class NameStructureFormatter
             obj["title"] = Organisation;
         }
     }
-
-    private static string GetName(JObject obj)
+    private static string GetIdString(JObject obj)
     {
         var id = string.Empty;
         for (var i = 1; i < 7; i++)
         {
-            var value = obj.GetValue(Field + "0" + i.ToString())?.ToString();
+            var value = obj.GetValue(Id + Field + i.ToString("D2"))?.ToString();
             if (string.IsNullOrEmpty(value)) continue;
             if (i is > 1 and < 7)
             {
@@ -42,7 +41,6 @@ public class NameStructureFormatter
         }
         return id;
     }
-
     private static string GetId(string str)
     {
         var parts = str.Split(" - ");
@@ -94,6 +92,14 @@ public class NameStructureFormatter
         dict["firstName"] = firstName;
         dict["lastName"] = lastName;
         return dict;
+    }
+
+    private static void DeleteIdFields(JObject jObject)
+    {
+        for (var i = 7; i > 0; i--)
+        {
+            jObject.Remove(Id + Field + i.ToString("D2"));
+        }
     }
 
 }
