@@ -15,13 +15,13 @@ public class OrganizationStructureFormatter
         foreach (var item in data)
         {
             var obj = (JObject)item;
-            if (string.IsNullOrEmpty(obj.GetValue(Field + "01", StringComparison.OrdinalIgnoreCase)?.ToString()))
-            {
-                continue; 
-            }
             if (obj.GetValue(Field + "01", StringComparison.OrdinalIgnoreCase)?.ToString() == Concern)
             {
                 obj = SortOrganizationTree(obj);
+            }
+            if (string.IsNullOrEmpty(obj.GetValue(Field + "01", StringComparison.OrdinalIgnoreCase)?.ToString()))
+            {
+                continue; 
             }
             var properties = obj.Properties().ToList();
             var previousValues = new Dictionary<string, string?>();
