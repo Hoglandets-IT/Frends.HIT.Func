@@ -101,5 +101,4 @@ public class NameStructureFormatter
             jObject.Remove(Id + Field + i.ToString("D2"));
         }
     }
-
 }

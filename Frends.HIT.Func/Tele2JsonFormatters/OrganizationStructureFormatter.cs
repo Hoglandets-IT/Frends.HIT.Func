@@ -10,9 +10,14 @@ public class OrganizationStructureFormatter
     
     public static JArray FormatOrganizationStructure(JArray data)
     {
+        var filteredData = new List<JObject>();
         foreach (var item in data)
         {
             var obj = (JObject)item;
+            if (string.IsNullOrEmpty(obj.GetValue(Field + "01", StringComparison.OrdinalIgnoreCase)?.ToString()))
+            {
+                continue; 
+            }
             if (obj.GetValue(Field + "01", StringComparison.OrdinalIgnoreCase)?.ToString() == Concern)
             {
                 obj = SortOrganizationTree(obj);
@@ -46,10 +51,10 @@ public class OrganizationStructureFormatter
                     property.Value = value;  
                     previousValues[property.Name] = value; 
                 }
-                
             }
+            filteredData.Add(obj);
         }
-        return data;
+        return JArray.FromObject(filteredData);;
     }
 
 
