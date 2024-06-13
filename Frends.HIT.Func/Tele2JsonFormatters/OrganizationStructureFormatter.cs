@@ -7,6 +7,7 @@ public class OrganizationStructureFormatter
 {
     private const string Concern = "Koncern";
     private const string Field = "field";
+    private const string Id = "ID";
     
     public static JArray FormatOrganizationStructure(JArray data)
     {
@@ -76,7 +77,12 @@ public class OrganizationStructureFormatter
         {
             obj[Field + i.ToString("D2")] = obj[Field + (i + 1).ToString("D2")];
         }
+        for (var i = 1; i <= 6; i++)
+        {
+            obj[Id + Field + i.ToString("D2")] = obj[Id + Field + (i + 1).ToString("D2")];
+        }
         obj[Field + "07"] = null;
+        obj[Id + Field + "07"] = null;
         return obj;
     }
 
