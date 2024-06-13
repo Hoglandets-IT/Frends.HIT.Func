@@ -89,6 +89,11 @@ public class NameStructureFormatter
                 break; 
             }
         }
+
+        if (string.IsNullOrEmpty(lastName))
+        {
+            lastName = Organisation;
+        }
         dict["firstName"] = firstName;
         dict["lastName"] = lastName;
         return dict;
