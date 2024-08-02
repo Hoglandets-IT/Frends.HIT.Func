@@ -3,6 +3,13 @@
 
 public class Program {
     public static void Main() {
+        var test = "199101011234";
+
+        Console.WriteLine(test.Substring(0, 8) + "-" + test.Substring(8));
+
+
+
+
         var mpc = new MultipartFormInput{
             Url = "https://httpbin.org/anything",
             ReturnsJson = true,
