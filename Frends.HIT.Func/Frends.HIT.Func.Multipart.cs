@@ -27,6 +27,17 @@ public static class Multipart {
         MultipartFormDataContent content = new();
 
         try {
+            if (input.QueryParameters != null) {
+                foreach (var pair in input.QueryParameters) {
+                    message.RequestUri = new Uri(message.RequestUri + (message.RequestUri.Query.Length > 1 ? "&" : "?") + pair.Key + "=" + pair.Value);
+                }
+            }
+
+        } catch (Exception e) {
+            throw new Exception($"Error adding query parameters: {e.Message}");
+        }
+
+        try {
             if (input.StringFormParameters != null) {
                 foreach (var pair in input.StringFormParameters) {
                     content.Add(new StringContent(pair.Value), pair.Key);

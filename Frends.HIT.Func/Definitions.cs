@@ -67,22 +67,28 @@ namespace Frends.HIT.Func {
     public class MultipartFormInput {
         public string Url { get; set; }
 
-        public string BasicUsername { get; set; }
-
-        public string BasicPassword  { get; set; }
-
         public bool ReturnsJson { get; set; }
 
+        [Display(Name = "Request Headers")]
+        [DefaultValue(default(StringValuePair))]
+        public StringValuePair[]? Headers { get; set; } = new StringValuePair[0];
 
-        public StringValuePair[] Headers { get; set; }
+        [Display(Name = "Form Query Parameters")]
+        [DefaultValue(default(StringValuePair))]
+        public StringValuePair[]? QueryParameters { get; set; } = new StringValuePair[0];
 
-        public StringValuePair[] QueryParameters { get; set; }
+        [Display(Name = "Form String Parameters")]
+        [DefaultValue(default(StringValuePair))]
+        public StringValuePair[]? StringFormParameters { get; set; } = new StringValuePair[0];
 
-        public StringValuePair[] StringFormParameters { get; set; }
+        [Display(Name = "Form Byte Parameters")]
+        [DefaultValue(default(ByteValuePair))]
+        public ByteValuePair[]? ByteFormParameters { get; set; } = new ByteValuePair[0];
 
-        public ByteValuePair[] ByteFormParameters { get; set; }
 
-        public FileValuePair[] FileFormParameters { get; set; }
+        [Display(Name = "Form File Parameters")]
+        [DefaultValue(default(FileValuePair))]
+        public FileValuePair[]? FileFormParameters { get; set; } = new FileValuePair[0];
     }
 
     public class MultipartFormResponse {
