@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Frends.HIT.Func\Frends.HIT.Func.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <_KeepLaunchProfiles>true</_KeepLaunchProfiles>
+  </PropertyGroup>
+
+</Project>

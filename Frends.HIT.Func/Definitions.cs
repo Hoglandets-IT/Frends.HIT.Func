@@ -43,4 +43,56 @@ namespace Frends.HIT.Func {
         [Display(Name = "Output Data")]
         public string OutputString { get; set; }
     }
+
+
+    public class StringValuePair
+    {
+        public string Key { get; set; }
+        public string Value { get; set; }
+    }
+
+    public class ByteValuePair
+    {
+        public string Key { get; set; }
+        public byte[] Value { get; set; }
+    }
+
+    public class FileValuePair
+    {
+        public string Key { get; set; }
+        public string FileName { get; set; }
+        public byte[] Value { get; set; }
+    }
+
+    public class MultipartFormInput {
+        public string Url { get; set; }
+
+        public string BasicUsername { get; set; }
+
+        public string BasicPassword  { get; set; }
+
+        public bool ReturnsJson { get; set; }
+
+
+        public StringValuePair[] Headers { get; set; }
+
+        public StringValuePair[] QueryParameters { get; set; }
+
+        public StringValuePair[] StringFormParameters { get; set; }
+
+        public ByteValuePair[] ByteFormParameters { get; set; }
+
+        public FileValuePair[] FileFormParameters { get; set; }
+    }
+
+    public class MultipartFormResponse {
+        public int StatusCode { get; set; }
+
+        public List<StringValuePair> Headers { get; set; }
+
+        public byte[] ByteContent { get; set; }
+
+        public JObject ParsedContent { get; set; }
+    }
+
 }

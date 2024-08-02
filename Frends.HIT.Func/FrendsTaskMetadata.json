@@ -5,6 +5,9 @@
         },
         {
             "TaskMethod": "Frends.HIT.Func.Main.FormatJsonDataTele2"
+        },
+        {
+            "TaskMethod": "Frends.HIT.Func.Multipart.MultipartRequest"
         }
     ]
 }
