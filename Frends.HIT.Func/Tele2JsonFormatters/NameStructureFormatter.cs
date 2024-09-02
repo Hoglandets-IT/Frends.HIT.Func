@@ -29,7 +29,7 @@ public class NameStructureFormatter
     private static string GetIdString(JObject obj)
     {
         var id = string.Empty;
-        for (var i = 1; i < 7; i++)
+        for (var i = 1; i < 8; i++)
         {
             var value = obj.GetValue(Id + Field + i.ToString("D2"))?.ToString();
             if (string.IsNullOrEmpty(value)) continue;
