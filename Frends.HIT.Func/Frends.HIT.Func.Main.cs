@@ -34,5 +34,30 @@ public static class Main {
         return output;
     }
 
+    /// <summary>
+    /// Runs a command line process and returns the output
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    public static OutputData RunCommand([PropertyTab] RunCommandInputData input) {
+        var output = new OutputData();
+        var processInfo = new System.Diagnostics.ProcessStartInfo(input.Command, String.Join(" ", input.Arguments));
+        if (!string.IsNullOrEmpty(input.WorkingDirectory)) processInfo.WorkingDirectory = input.WorkingDirectory;
+        processInfo.RedirectStandardOutput = true;
+        processInfo.RedirectStandardError = true;
+        processInfo.UseShellExecute = false;
+        processInfo.CreateNoWindow = true;
+        var process = new System.Diagnostics.Process();
+        process.StartInfo = processInfo;
+        process.Start();
 
+        string outputString = process.StandardOutput.ReadToEnd();
+        string errorString = process.StandardError.ReadToEnd();
+
+        process.WaitForExit();
+
+        output.OutputString = string.IsNullOrEmpty(errorString) ? outputString : errorString;
+
+        return output;
+    }
 }

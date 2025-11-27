@@ -33,6 +33,34 @@ namespace Frends.HIT.Func {
     }
 
     /// <summary>
+    /// Input data for the Run Command function
+    /// </summary>
+    public class RunCommandInputData
+    {
+        /// <summary>
+        /// The command/program to run (e.g. cmd.exe)
+        /// </summary>
+        [Display(Name = "Command to run")]
+        [DisplayFormat(DataFormatString = "Text")]
+        [DefaultValue("cmd.exe")]
+        public string Command { get; set; }
+
+        /// <summary>
+        /// The arguments for the command
+        /// </summary>
+        [Display(Name = "Arguments")]
+        [DisplayFormat(DataFormatString = "Text")]
+        public string[] Arguments { get; set; }
+
+        /// <summary>
+        /// The working directory for the command
+        /// </summary>
+        [Display(Name = "Working Directory")]
+        [DisplayFormat(DataFormatString = "Text")]
+        public string WorkingDirectory { get; set; }
+    }
+
+    /// <summary>
     /// Output data for the return input function
     /// </summary>
     public class OutputData {
