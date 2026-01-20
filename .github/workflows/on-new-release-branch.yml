@@ -19,16 +19,10 @@ jobs:
       
       - name: Build and Pack
         run: |
-          echo "Adding source"
-          echo ${{ secrets.FRENDS_NUGET_V2_FEED_URL }} |sed 's/./& /g'
           dotnet nuget add source --name hit-registry --store-password-in-clear-text --username ${{ secrets.FRENDS_NUGET_V2_FEED_USER }} --password "${{ secrets.FRENDS_NUGET_V2_FEED_KEY }}" ${{ secrets.FRENDS_NUGET_V2_FEED_URL }}
-          echo "Restroing"
           dotnet restore Frends.HIT.Func/Frends.HIT.Func.csproj
-          echo "Building"
           dotnet build --configuration Release Frends.HIT.Func/Frends.HIT.Func.csproj /p:Version=$GITHUB_REF_NAME
-          echo "Packing"
           dotnet pack --configuration Release Frends.HIT.Func/Frends.HIT.Func.csproj --include-source /p:Version=$GITHUB_REF_NAME
-          echo "Pushing"
           dotnet nuget push --source hit-registry Frends.HIT.Func/bin/Release/Frends.HIT.Func.*.nupkg --skip-duplicate
       
       - name: Upload binaries to release
