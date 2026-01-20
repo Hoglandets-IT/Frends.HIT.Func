@@ -20,6 +20,7 @@ jobs:
       - name: Build and Pack
         run: |
           echo "Adding source"
+          echo "${{ secrets.FRENDS_NUGET_V2_FEED_URL }}" 
           dotnet nuget add source --name hit-registry --store-password-in-clear-text --username ${{ secrets.FRENDS_NUGET_V2_FEED_USER }} --password "${{ secrets.FRENDS_NUGET_V2_FEED_KEY }}" ${{ secrets.FRENDS_NUGET_V2_FEED_URL }}
           echo "Restroing"
           dotnet restore Frends.HIT.Func/Frends.HIT.Func.csproj
